@@ -26,10 +26,23 @@ int	my_getnbr(char *str)
 	return (signe * result);
 }
 
+int	get_flagl(t_tree *tree, int ac, char **av, int i)
+{
+	char	*error_level = "tree: Invalid level, must be greater than 0.\n";
+
+	if (i + 1 >= ac)
+		return (0);
+	tree->max_denth = my_getnbr(av[i++ + 1]);
+	if (tree->max_denth <= 0) {
+		my_putstr_err(error_level);
+		return (0);
+	}
+	return (1);
+}
+
 int	check_arguments(t_tree *tree, int ac, char **av)
 {
 	int	i = 0;
-	char	*error_level = "tree: Invalid level, must be greater than 0.\n";
 
 	while (++i < ac) {
 		if (my_strcmp(av[i], "-a") == 0)
@@ -39,13 +52,8 @@ int	check_arguments(t_tree *tree, int ac, char **av)
 		else if (my_strcmp(av[i], "-f") == 0)
 			tree->all_path = 1;
 		else if (my_strcmp(av[i], "-L") == 0) {
-			if (i + 1 >= ac)
+			if (!get_flagl(tree, ac, av, i))
 				return (0);
-			tree->max_denth = my_getnbr(av[i++ + 1]);
-			if (tree->max_denth <= 0) {
-				my_putstr_err(error_level);
-				return (0);
-			}
 		} else {
 			tree->path = av[i];
 			if (tree->path[my_strlen(tree->path) - 1] == '/')

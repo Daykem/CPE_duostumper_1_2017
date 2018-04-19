@@ -28,7 +28,8 @@ void	print_elements(t_tree *tree, t_read *first, int level, char *path)
 			tmp = tmp->next;
 			continue;
 		}
-		print_level(level, !has_next(tree, tmp->next));
+		print_level(level, !has_next(tree, tmp->next),
+			!has_next(tree, first));
 		print_name_element(tree, tmp->read->d_name, path);
 		my_putstr("\n");
 		if (tmp->read->d_type == DT_DIR) {

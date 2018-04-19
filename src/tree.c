@@ -18,17 +18,21 @@ void	init_program(t_tree *tree)
 	tree->path = ".";
 }
 
-void	print_level(int level, int last)
+void	print_level(int level, int last, int lastdir)
 {
 	int	tmp = level;
 
 	my_putstr(last && level <= 1 ? "`" : "|");
 	while (tmp > 1) {
 		my_putstr("   ");
+		if (last && tmp == 2)
+			my_putstr("`");
+		else if (tmp >= level - 1 && !lastdir)
+			my_putstr("|");
+		else
+			my_putstr(" ");
 		tmp--;
 	}
-	if (level > 1)
-		my_putstr(last ? "`" : "|");
 	my_putstr("-- ");
 }
 
@@ -63,20 +67,6 @@ void	list_dir(t_tree *tree, char *path, int level)
 	free_reader(list);
 	free(path_concat);
 	free(path);
-}
-
-int	has_next(t_tree	*tree, t_read *tmp)
-{
-	if (tmp == NULL)
-		return (0);
-	while (tmp != NULL) {
-		if (tmp->read->d_type != DT_DIR && tree->only_dir) {
-			tmp = tmp->next;
-			continue;
-		}
-		return (1);
-	}
-	return (0);
 }
 
 void	start_program(t_tree *tree)
