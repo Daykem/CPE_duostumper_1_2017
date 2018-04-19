@@ -16,12 +16,12 @@ void	free_reader(t_read *first)
 {
 	t_read	*next = first;
 	t_read	*tmp;
-	
+
 	while (next != NULL) {
 		tmp = next;
 		next = next->next;
 		free(tmp);
-	}	
+	}
 }
 
 char	*my_strconcat(char *s1, char *s2)

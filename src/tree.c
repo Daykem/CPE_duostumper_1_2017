@@ -54,7 +54,6 @@ void	list_dir(t_tree *tree, char *path, int level)
 		if (read->d_name[0] == '.' && !tree->hidden_files)
 			continue;
 		list = add_element(list, read);
-		
 	}
 	tree->tri = 1;
 	while (tree->tri)
@@ -67,7 +66,7 @@ void	list_dir(t_tree *tree, char *path, int level)
 }
 
 int	has_next(t_tree	*tree, t_read *tmp)
-{	
+{
 	if (tmp == NULL)
 		return (0);
 	while (tmp != NULL) {
@@ -107,9 +106,9 @@ int	main(int ac, char **av)
 
 	if (tree == NULL)
 		return (84);
-        init_program(tree);
+	init_program(tree);
 	if (!check_arguments(tree, ac, av))
-		return (1);	
+		return (1);
 	start_program(tree);
 	free(tree);
 	return (0);

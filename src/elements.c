@@ -45,19 +45,17 @@ t_read	*add_element(t_read *first, struct dirent *read)
 {
 	t_read	*element = malloc(sizeof(t_read));
 	t_read	*tmp;
-	
+
 	element->read = read;
 	element->prev = NULL;
 	element->next = NULL;
 	if (first == NULL)
 		return (element);
-	else {
-		tmp = first;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		element->prev = tmp;
-		tmp->next = element;		
-	}
+	tmp = first;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	element->prev = tmp;
+	tmp->next = element;
 	return (first);
 }
 
@@ -73,11 +71,12 @@ t_read	*order_elements(t_tree *tree, t_read *first)
 		return (first);
 	}
 	while (old != NULL && tmp != NULL
-			&& my_strcmp(old->read->d_name, tmp->read->d_name) < 0) {
+	&& my_strcmp(old->read->d_name, tmp->read->d_name) < 0) {
 		old = old->next;
 		tmp = tmp->next;
 	}
-	if (old == NULL || tmp == NULL || my_strcmp(old->read->d_name, tmp->read->d_name) < 0) {
+	if (old == NULL || tmp == NULL
+	|| my_strcmp(old->read->d_name, tmp->read->d_name) < 0) {
 		tree->tri = 0;
 		return (first);
 	}

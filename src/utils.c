@@ -29,7 +29,7 @@ char	*my_strtolow(char *str)
 {
 	int	i = -1;
 	char	*res = malloc(my_strlen(str) + 1);
-	
+
 	while (str[++i]) {
 		if (str[i] >= 'A' && str[i] <= 'Z')
 			res[i] = str[i] + 32;
@@ -46,7 +46,7 @@ int	my_strcmp(char *s1, char *s2)
 	char	*t1 = my_strtolow(s1);
 	char	*t2 = my_strtolow(s2);
 	int	diff;
-	
+
 	while (t1[i] == t2[i] && t1[i] && t2[i])
 		i++;
 	diff = t1[i] - t2[i];
