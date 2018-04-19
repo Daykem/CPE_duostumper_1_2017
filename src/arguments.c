@@ -30,8 +30,10 @@ int	get_flagl(t_tree *tree, int ac, char **av, int i)
 {
 	char	*error_level = "tree: Invalid level, must be greater than 0.\n";
 
-	if (i + 1 >= ac)
+	if (i + 1 >= ac) {
+		my_putstr_err("tree: Missing argument to -L option.\n");
 		return (0);
+	}
 	tree->max_denth = my_getnbr(av[i++ + 1]);
 	if (tree->max_denth <= 0) {
 		my_putstr_err(error_level);
@@ -58,6 +60,7 @@ int	check_arguments(t_tree *tree, int ac, char **av)
 			tree->path = av[i];
 			if (tree->path[my_strlen(tree->path) - 1] == '/')
 				tree->path[my_strlen(tree->path) - 1] = 0;
+			start_program(tree);
 		}
 	}
 	return (1);

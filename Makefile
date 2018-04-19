@@ -5,9 +5,15 @@
 ## Made by developers
 ##
 
-SRC	=	$(wildcard src/*.c)
+SRC	=	src/arguments.c	\
+		src/elements.c		\
+		src/elements_utils.c	\
+		src/my_put_nbr.c	\
+		src/tree.c		\
+		src/utils2.c		\
+		src/utils.c
 
-CFLAGS	+=	-Wextra -Wall -g3 #-Werror
+CFLAGS	+=	-Wextra -Wall
 
 CFLAGS	+=	-I./include/
 

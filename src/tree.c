@@ -13,27 +13,9 @@ void	init_program(t_tree *tree)
 	tree->only_dir = 0;
 	tree->max_denth = -1;
 	tree->all_path = 0;
+	tree->path = NULL;
 	tree->count_files = 0;
 	tree->count_dir = 0;
-	tree->path = ".";
-}
-
-void	print_level(int level, int last, int lastdir)
-{
-	int	tmp = level;
-
-	my_putstr(last && level <= 1 ? "`" : "|");
-	while (tmp > 1) {
-		my_putstr("   ");
-		if (last && tmp == 2)
-			my_putstr("`");
-		else if (tmp >= level - 1 && !lastdir)
-			my_putstr("|");
-		else
-			my_putstr(" ");
-		tmp--;
-	}
-	my_putstr("-- ");
 }
 
 void	list_dir(t_tree *tree, char *path, int level)
@@ -48,9 +30,11 @@ void	list_dir(t_tree *tree, char *path, int level)
 	path_concat = my_strconcat(tree->path, path);
 	dir = opendir(path_concat);
 	if (dir == NULL) {
+		my_putstr(" [error opening dir]\n");
 		free(path_concat);
 		return;
-	}
+	} else if (level == 1)
+		my_putstr("\n");
 	while ((read = readdir(dir)) != NULL) {
 		if (my_strcmp(read->d_name, ".") == 0
 		|| my_strcmp(read->d_name, "..") == 0)
@@ -72,8 +56,11 @@ void	list_dir(t_tree *tree, char *path, int level)
 void	start_program(t_tree *tree)
 {
 	my_putstr(tree->path);
-	my_putstr("\n");
 	list_dir(tree, my_strconcat("", ""), 1);
+}
+
+void	print_result(t_tree *tree)
+{
 	my_putstr("\n");
 	my_put_nbr(tree->count_dir);
 	if (tree->count_dir == 1)
@@ -99,7 +86,11 @@ int	main(int ac, char **av)
 	init_program(tree);
 	if (!check_arguments(tree, ac, av))
 		return (1);
-	start_program(tree);
+	if (tree->path == NULL) {
+		tree->path = ".";
+		start_program(tree);
+	}
+	print_result(tree);
 	free(tree);
 	return (0);
 }

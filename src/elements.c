@@ -7,6 +7,22 @@
 
 #include "tree.h"
 
+void	print_level(int level, int last)
+{
+	int	tmp = level;
+
+	my_putstr(last && level <= 1 ? "`" : "|");
+	while (tmp > 1) {
+		my_putstr("   ");
+		if (last && tmp == 2)
+			my_putstr("`");
+		else
+			my_putstr("|");
+		tmp--;
+	}
+	my_putstr("-- ");
+}
+
 void	print_name_element(t_tree *tree, char *name, char *path)
 {
 	char	*str = my_strconcat(path, name);
@@ -28,8 +44,7 @@ void	print_elements(t_tree *tree, t_read *first, int level, char *path)
 			tmp = tmp->next;
 			continue;
 		}
-		print_level(level, !has_next(tree, tmp->next),
-			!has_next(tree, first));
+		print_level(level, !has_next(tree, tmp->next));
 		print_name_element(tree, tmp->read->d_name, path);
 		my_putstr("\n");
 		if (tmp->read->d_type == DT_DIR) {

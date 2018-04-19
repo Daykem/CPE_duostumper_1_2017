@@ -46,12 +46,13 @@ int	my_put_nbr(int);
 int	check_arguments(t_tree *, int, char **);
 
 int	has_next(t_tree	*, t_read *);
-	
+void	start_program(t_tree *);
+
 void	print_elements(t_tree *, t_read *, int, char*);
 t_read	*add_element(t_read *, struct dirent *);
 t_read  *order_elements(t_tree *, t_read *);
 
-void	print_level(int, int, int);
+void	print_level(int, int);
 void	list_dir(t_tree *, char *, int);
 int	has_next(t_tree *, t_read *);
 
