@@ -49,7 +49,7 @@ void	list_dir(t_tree *tree, char *path, int level)
 	}
 	while ((read = readdir(dir)) != NULL) {
 		if (my_strcmp(read->d_name, ".") == 0
-		    || my_strcmp(read->d_name, "..") == 0)
+		|| my_strcmp(read->d_name, "..") == 0)
 			continue;
 		if (read->d_name[0] == '.' && !tree->hidden_files)
 			continue;
