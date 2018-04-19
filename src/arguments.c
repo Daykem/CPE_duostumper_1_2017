@@ -34,7 +34,7 @@ int	get_flagl(t_tree *tree, int ac, char **av, int i)
 		my_putstr_err("tree: Missing argument to -L option.\n");
 		return (0);
 	}
-	tree->max_denth = my_getnbr(av[i++ + 1]);
+	tree->max_denth = my_getnbr(av[i + 1]);
 	if (tree->max_denth <= 0) {
 		my_putstr_err(error_level);
 		return (0);
@@ -54,7 +54,7 @@ int	check_arguments(t_tree *tree, int ac, char **av)
 		else if (my_strcmp(av[i], "-f") == 0)
 			tree->all_path = 1;
 		else if (my_strcmp(av[i], "-L") == 0) {
-			if (!get_flagl(tree, ac, av, i))
+			if (!get_flagl(tree, ac, av, i++))
 				return (0);
 		} else {
 			tree->path = av[i];
