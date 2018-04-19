@@ -30,6 +30,8 @@ char	*my_strconcat(char *s1, char *s2)
 	int	i = 0;
 	int	a = -1;
 
+	if (res == NULL)
+		return (NULL);
 	while (s1[++a])
 		res[i++] = s1[a];
 	a = -1;
