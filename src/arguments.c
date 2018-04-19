@@ -42,7 +42,7 @@ int	get_flagl(t_tree *tree, int ac, char **av, int i)
 	return (1);
 }
 
-int	check_arguments(t_tree *tree, int ac, char **av)
+int	check_arguments(t_tree *tree, int ac, char **av, int options)
 {
 	int	i = 0;
 
@@ -56,7 +56,7 @@ int	check_arguments(t_tree *tree, int ac, char **av)
 		else if (my_strcmp(av[i], "-L") == 0) {
 			if (!get_flagl(tree, ac, av, i++))
 				return (0);
-		} else {
+		} else if (!options) {
 			tree->path = av[i];
 			if (tree->path[my_strlen(tree->path) - 1] == '/')
 				tree->path[my_strlen(tree->path) - 1] = 0;

@@ -85,8 +85,9 @@ int	main(int ac, char **av)
 	if (tree == NULL)
 		return (84);
 	init_program(tree);
-	if (!check_arguments(tree, ac, av))
+	if (!check_arguments(tree, ac, av, 1))
 		return (1);
+	check_arguments(tree, ac, av, 0);
 	if (tree->path == NULL) {
 		tree->path = ".";
 		start_program(tree);

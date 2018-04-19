@@ -43,7 +43,7 @@ void	free_reader(t_read*);
 char	*my_strconcat(char *, char *);
 
 int	my_put_nbr(int);
-int	check_arguments(t_tree *, int, char **);
+int	check_arguments(t_tree *, int, char **, int);
 
 int	has_next(t_tree	*, t_read *);
 void	start_program(t_tree *);
