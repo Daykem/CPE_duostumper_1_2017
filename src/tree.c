@@ -32,6 +32,7 @@ void	list_dir(t_tree *tree, char *path, int level)
 	if (dir == NULL) {
 		my_putstr(" [error opening dir]\n");
 		free(path_concat);
+		free(path);
 		return;
 	} else if (level == 1)
 		my_putstr("\n");
